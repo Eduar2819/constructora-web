@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SosaCraft Studio · Landing completa</title>
+<style>
+  @font-face { font-family: 'IBM Plex Sans'; font-weight: 500; src: url('../../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-500-normal.woff2'); }
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1080px; height: 1080px; overflow: hidden; }
+  .canvas {
+    position: relative; width: 1080px; height: 1080px; overflow: hidden;
+    background:
+      radial-gradient(520px 380px at 88% 8%, rgb(227 155 18 / 0.16), transparent 70%),
+      linear-gradient(180deg, #0c1a2b 0%, #1f3a5a 38%, #8fa8c2 72%, #e6ecf2 100%);
+  }
+  /* page is 1440 css px wide, 6159 tall; columns render it at 490px */
+  .col {
+    position: absolute; width: 490px; overflow: hidden; border-radius: 12px; background: #eef2f5;
+    box-shadow: 0 30px 60px -24px rgb(8 19 33 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+  .col img { position: absolute; left: 0; width: 490px; }
+  .left { left: 40px; top: 32px; height: 1100px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .left img { top: 0; }
+  .right { left: 550px; top: 44px; height: 918px; }
+  .right img { top: -1178.1px; } /* 3462 css px (just above Proceso) × 490/1440 */
+  .brand { position: absolute; left: 550px; width: 490px; top: 976px; height: 88px; display: flex; align-items: center; justify-content: space-between; }
+  .brand img { height: 62px; mix-blend-mode: multiply; margin-left: -12px; }
+  .tag { text-align: right; font: 500 14px/1.5 'IBM Plex Sans', sans-serif; color: #4e5d6c; }
+  .tag strong { display: block; color: #1e1d1b; font-weight: 500; font-size: 16px; }
+  .tag i { font-style: normal; color: #c4552b; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="col left"><img src="landing-completa.png" alt=""></div>
+  <div class="col right"><img src="landing-completa.png" alt=""></div>
+  <div class="brand">
+    <img src="sosacraft-studio-logo.png" alt="SosaCraft Studio">
+    <div class="tag"><strong>Landing page completa</strong>Diseño <i>·</i> Desarrollo <i>·</i> UX</div>
+  </div>
+</div>
+</body>
+</html>

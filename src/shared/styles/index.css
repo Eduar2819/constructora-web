@@ -1,0 +1,199 @@
+@import 'tailwindcss';
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+
+@theme {
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /*
+   * Light site on paper (#eef2f5) with navy text; navy pieces (hero, nav, contact card, footer,
+   * photo cards) opt into .surface-dark. The role tokens below (paper-100 = strong text,
+   * steel-300/400 = secondary/muted text, signal = accent line/text) hold their LIGHT values here
+   * and are swapped by .surface-dark. Every pair passes WCAG AA on #eef2f5:
+   * text 15.6:1, secondary 7.3:1, muted 5.0:1, signal 4.8:1, danger 5.8:1.
+   * The logo amber is only 2.1:1 on paper, so it appears as a FILL (navy text on it: 7.5:1)
+   * or on navy, never as thin text or lines on the light background.
+   */
+  --color-ink-950: #081321;
+  --color-ink-900: #0c1a2b;
+  --color-ink-800: #13253a;
+  --color-ink-700: #1c3149;
+  --color-ink-600: #2a4560;
+  --color-steel-400: #56697d;
+  --color-steel-300: #3d5166;
+  --color-paper-100: #0c1a2b;
+  --color-paper-200: #1c3149;
+  --color-signal-500: #9a5c06;
+  --color-signal-400: #9a5c06;
+  --color-signal-600: #7d4a04;
+  /* Logo amber for filled brand surfaces (buttons, chips); identical in both scopes */
+  --color-brand-500: #e39b12;
+  --color-brand-400: #efb23f;
+  --color-danger-400: #b42318;
+  /* Current scope background and hairlines */
+  --color-surface: #eef2f5;
+  --color-line: rgb(12 26 43 / 0.12);
+  /* Blueprint grid strokes, ink on paper by default */
+  --grid-major: rgb(12 26 43 / 0.08);
+  --grid-minor: rgb(12 26 43 / 0.035);
+
+  /* Shape rule: buttons = rounded-full, surfaces and images = rounded-3xl, inputs and small marks = rounded-xl */
+
+  --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  /*
+   * Navy pieces on the light page. Restores the dark values of the role tokens so the same markup
+   * reads correctly: text 15.6:1, secondary 9.3:1, muted 6.1:1, amber 7.5:1 on #0c1a2b.
+   */
+  .surface-dark {
+    --color-surface: #0c1a2b;
+    --color-line: rgb(255 255 255 / 0.1);
+    --grid-major: rgb(142 163 183 / 0.1);
+    --grid-minor: rgb(142 163 183 / 0.04);
+    --color-paper-100: #eef2f5;
+    --color-paper-200: #dce4ea;
+    --color-steel-300: #b3c3d1;
+    --color-steel-400: #8ea3b7;
+    --color-signal-500: #e39b12;
+    --color-signal-400: #efb23f;
+    --color-signal-600: #c4830a;
+    --color-danger-400: #f08a73;
+    background-color: var(--color-surface);
+    color: var(--color-paper-100);
+    color-scheme: dark;
+  }
+
+  /* Light section that melts into a navy neighbour (hero above, footer below) */
+  .surface-light {
+    --fade-top: 0rem;
+    --fade-bottom: 0rem;
+    /*
+     * Edges melt into the navy neighbours along a smootherstep curve (flat at both ends, so no
+     * visible band where the fade starts or stops), interpolated in oklch to keep the blue hue.
+     */
+    background: linear-gradient(
+      to bottom,
+      var(--color-ink-900) calc(var(--fade-top) * 0),
+      color-mix(in oklch, var(--color-surface) 0.9%, var(--color-ink-900)) calc(var(--fade-top) * 0.1),
+      color-mix(in oklch, var(--color-surface) 5.8%, var(--color-ink-900)) calc(var(--fade-top) * 0.2),
+      color-mix(in oklch, var(--color-surface) 16.3%, var(--color-ink-900)) calc(var(--fade-top) * 0.3),
+      color-mix(in oklch, var(--color-surface) 31.7%, var(--color-ink-900)) calc(var(--fade-top) * 0.4),
+      color-mix(in oklch, var(--color-surface) 50%, var(--color-ink-900)) calc(var(--fade-top) * 0.5),
+      color-mix(in oklch, var(--color-surface) 68.3%, var(--color-ink-900)) calc(var(--fade-top) * 0.6),
+      color-mix(in oklch, var(--color-surface) 83.7%, var(--color-ink-900)) calc(var(--fade-top) * 0.7),
+      color-mix(in oklch, var(--color-surface) 94.2%, var(--color-ink-900)) calc(var(--fade-top) * 0.8),
+      color-mix(in oklch, var(--color-surface) 99.1%, var(--color-ink-900)) calc(var(--fade-top) * 0.9),
+      var(--color-surface) calc(var(--fade-top) * 1),
+      var(--color-surface) calc(100% - var(--fade-bottom) * 1),
+      color-mix(in oklch, var(--color-surface) 99.1%, var(--color-ink-900)) calc(100% - var(--fade-bottom) * 0.9),
+      color-mix(in oklch, var(--color-surface) 94.2%, var(--color-ink-900)) calc(100% - var(--fade-bottom) * 0.8),
+      color-mix(in oklch, var(--color-surface) 83.7%, var(--color-ink-900)) calc(100% - var(--fade-bottom) * 0.7),
+      color-mix(in oklch, var(--color-surface) 68.3%, var(--color-ink-900)) calc(100% - var(--fade-bottom) * 0.6),
+      color-mix(in oklch, var(--color-surface) 50%, var(--color-ink-900)) calc(100% - var(--fade-bottom) * 0.5),
+      color-mix(in oklch, var(--color-surface) 31.7%, var(--color-ink-900)) calc(100% - var(--fade-bottom) * 0.4),
+      color-mix(in oklch, var(--color-surface) 16.3%, var(--color-ink-900)) calc(100% - var(--fade-bottom) * 0.3),
+      color-mix(in oklch, var(--color-surface) 5.8%, var(--color-ink-900)) calc(100% - var(--fade-bottom) * 0.2),
+      color-mix(in oklch, var(--color-surface) 0.9%, var(--color-ink-900)) calc(100% - var(--fade-bottom) * 0.1),
+      var(--color-ink-900) calc(100% - var(--fade-bottom) * 0)
+    );
+    color: var(--color-paper-100);
+    color-scheme: light;
+  }
+
+  /* Navy text reaches AA past ~60% of the curve, so content padding must exceed the fade */
+  .surface-light.fade-top {
+    --fade-top: 10rem;
+  }
+  .surface-light.fade-bottom {
+    --fade-bottom: 10rem;
+  }
+
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  body {
+    @apply bg-surface text-paper-100 font-body antialiased;
+    font-feature-settings: 'ss01' 1;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-brand-500 text-ink-950;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .balance {
+    text-wrap: balance;
+  }
+
+  /* Brand motif: faint blueprint grid (major 120px / minor 24px), faded out with a mask */
+  .blueprint-grid {
+    background-image:
+      linear-gradient(var(--grid-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+      linear-gradient(var(--grid-minor) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+    background-size:
+      120px 120px,
+      120px 120px,
+      24px 24px,
+      24px 24px;
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .marquee-track {
+    animation: marquee 36s linear infinite;
+  }
+
+  .marquee-fade {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+}

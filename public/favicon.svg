@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- SosaCraft roof mark, simplified from src/assets/brand/sosacraft-logo.png -->
+  <rect width="48" height="48" rx="12" fill="#0c1a2b"/>
+  <rect x="30.5" y="15" width="4" height="9" fill="#e39b12"/>
+  <path d="M7 33 L24 19 L41 33" fill="none" stroke="#e39b12" stroke-width="4.5" stroke-linejoin="miter"/>
+</svg>
